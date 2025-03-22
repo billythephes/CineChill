@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { UserIcon, ChevronDownIcon, Bars3CenterLeftIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/20/solid';
 import SearchBar from '../ui/search-bar';
 import { nav1, nav2 } from './nav-items';
-import { DropdownMenu } from '../ui/menu';
+import { MainMenu } from '../ui/main-menu';
 import Logo from '../ui/logo';
 
 export default function Header() {
@@ -40,7 +40,7 @@ export default function Header() {
       {!isSearchOpen &&
         <div className="flex items-center space-x-7">
           <div className="flex items-center cursor-pointer xl:hidden">
-            <DropdownMenu />
+            <MainMenu />
           </div>
 
           <Link

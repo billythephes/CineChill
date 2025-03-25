@@ -4,9 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { UserIcon, ChevronDownIcon, Bars3CenterLeftIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/20/solid';
 import SearchBar from '../ui/search-bar';
-import { nav1, nav2 } from './nav-items';
+import { navLink, navDropdown } from './nav-items';
 import { MainMenu } from '../ui/main-menu';
 import Logo from '../ui/logo';
+import { FilterMenu } from '../ui/filter-menu';
 
 export default function Header() {
 
@@ -55,25 +56,18 @@ export default function Header() {
       <SearchBar isSearchOpen={isSearchOpen} />
 
       <nav className="flex items-center space-x-8 hidden xl:inline-flex">
-        {nav1.map((nav1) => (
+        {navLink.map((navLink) => (
           <Link
-            key={nav1.id}
-            href={nav1.route}
+            key={navLink.id}
+            href={navLink.route}
             className="hover:text-[#ffd875] transition-colors text-sm"
           >
-            {nav1.name}
+            {navLink.name}
           </Link>
         ))}
 
-        {nav2.map((nav2) => (
-          <Link
-            key={nav2.id}
-            href={nav2.route}
-            className="flex items-center hover:text-[#ffd875] transition-colors text-sm"
-          >
-            {nav2.name}
-            <ChevronDownIcon className="h-4 w-4" />
-          </Link>
+        {navDropdown.map((nav) => (
+          <FilterMenu key={nav.id} navDropdown={nav}/>
         ))}
       </nav>
 

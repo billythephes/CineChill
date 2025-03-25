@@ -1,10 +1,16 @@
-interface NavItem {
+interface NavLinkItem {
   id: number;
   route: string;
   name: string;
 }
 
-export const nav1: NavItem[] = [
+interface NavDropdownItem {
+  id: number;
+  api: string;
+  name: string;
+}
+
+export const navLink: NavLinkItem[] = [
   {
     id: 1,
     route: "/tv-shows",
@@ -27,20 +33,20 @@ export const nav1: NavItem[] = [
   },
 ];
 
-export const nav2: NavItem[] = [
+export const navDropdown: NavDropdownItem[] = [
   {
     id: 1,
-    route: "/the-loai",
+    api: "https://phimapi.com/the-loai",
     name: "Thể loại"
   },
   {
     id: 2,
-    route: "/quoc-gia",
+    api: "https://phimapi.com/quoc-gia",
     name: "Quốc gia"
   },
   {
     id: 3,
-    route: "/nam-phat-hanh",
+    api: "http://localhost:3000/api/nam-phat-hanh",
     name: "Năm"
-  }
+  },
 ]

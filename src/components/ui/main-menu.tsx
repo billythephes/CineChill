@@ -10,6 +10,8 @@ import {
 } from "@material-tailwind/react";
 import { navLink, navDropdown } from "../layout/nav-items";
 import Link from "next/link";
+import handleAPIs from "@/lib/api/handleAPI";
+import Loading from "./loading";
 
 interface Items {
     map(arg0: (item: any) => React.JSX.Element): React.ReactNode;
@@ -20,20 +22,22 @@ interface Items {
 
 export function MainMenu() {
     const [items, setItems] = useState<Items[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 // Create array of Promises to fetch data from all URLs
-                const promises = navDropdown.map(nav => fetch(nav.api));
-                const responses = await Promise.all(promises);
+                const promises = navDropdown.map(nav => handleAPIs.getData(nav.api));
+                const data = await Promise.all(promises);
 
-                // Convert responses to JSON
-                const data = await Promise.all(responses.map(response => response.json()));
                 console.log(data);
                 setItems(data);
             } catch (error) {
                 console.error('Error fetching data:', error);
+            }
+            finally {
+                setLoading(false);
             }
         };
         fetchData();
@@ -43,9 +47,9 @@ export function MainMenu() {
             <MenuHandler>
                 <Bars3CenterLeftIcon className="h-7 w-7 text-white" />
             </MenuHandler>
-            <MenuList className="flex flex-col bg-[#373b40] hover:text-[#ffd875] text-white z-100 mt-[14px] p-2">
+            <MenuList className="flex flex-col bg-[#373b40] text-white z-100 mt-[14px] p-2">
                 {navLink.map((navLink) => (
-                    <Link href={navLink.route} key={navLink.id}>
+                    <Link href={navLink.route} key={navLink.id} className="hover:text-[#ffd875] outline-none">
                         <MenuItem className="text-left p-1">{navLink.name}</MenuItem>
                     </Link>
                 ))}
@@ -56,7 +60,7 @@ export function MainMenu() {
                         allowHover
                         key={index}
                     >
-                        <MenuHandler className="flex items-center justify-between p-1">
+                        <MenuHandler className="flex items-center justify-between hover:text-[#ffd875] p-1">
                             <MenuItem>
                                 {nav.name}
                                 <ChevronRightIcon
@@ -65,6 +69,12 @@ export function MainMenu() {
                             </MenuItem>
                         </MenuHandler>
                         <MenuList className="grid grid-cols-2 gap-4 outline-none bg-[#373b40] z-100 text-white ml-[3px] p-3 max-h-100 overflow-y-auto">
+                            {loading &&
+                                <MenuItem className="flex justify-center items-center col-span-2 h-full">
+                                    <Loading width={30} height={30} className={""} />
+                                </MenuItem>
+                            }
+
                             {items[index] && items[index].map((item) => (
                                 <Link
                                     key={item._id}

@@ -11,12 +11,7 @@ import {
 import Link from "next/link";
 import handleAPIs from "@/lib/api/handleAPI";
 import Loading from "./loading";
-
-interface Items {
-    _id: string;
-    name: string;
-    slug: string;
-}
+import { Items } from "@/shared/interfaces/INavItem";
 
 export function FilterMenu({ navDropdown }: { navDropdown: any }) {
     const [items, setItems] = useState<Items[]>([]);
@@ -48,7 +43,7 @@ export function FilterMenu({ navDropdown }: { navDropdown: any }) {
                     <ChevronDownIcon className="h-4 w-4" />
                 </div>
             </MenuHandler>
-            <MenuList className="grid grid-cols-4 gap-8 outline-none bg-[#373b40] text-white z-100 mt-[21] p-3">
+            <MenuList className="grid grid-cols-4 gap-8 outline-none border-none bg-[#373b40] text-white z-100 mt-[21] p-3">
                 {loading &&
                     <MenuItem className="flex justify-center items-center col-span-4 h-full">
                         <Loading width={30} height={30} className={""} />

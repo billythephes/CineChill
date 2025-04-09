@@ -12,13 +12,7 @@ import { navLink, navDropdown } from "../layout/nav-items";
 import Link from "next/link";
 import handleAPIs from "@/lib/api/handleAPI";
 import Loading from "./loading";
-
-interface Items {
-    map(arg0: (item: any) => React.JSX.Element): React.ReactNode;
-    _id: string;
-    name: string;
-    slug: string;
-}
+import { Items } from "@/shared/interfaces/INavItem";
 
 export function MainMenu() {
     const [items, setItems] = useState<Items[]>([]);
@@ -47,7 +41,7 @@ export function MainMenu() {
             <MenuHandler>
                 <Bars3CenterLeftIcon className="h-7 w-7 text-white" />
             </MenuHandler>
-            <MenuList className="flex flex-col bg-[#373b40] text-white z-100 mt-[14px] p-2">
+            <MenuList className="flex flex-col bg-[#373b40] outline-none border-none text-white z-100 mt-[14px] p-2">
                 {navLink.map((navLink) => (
                     <Link href={navLink.route} key={navLink.id} className="hover:text-[#ffd875] outline-none">
                         <MenuItem className="text-left p-1">{navLink.name}</MenuItem>
@@ -68,7 +62,7 @@ export function MainMenu() {
                                 />
                             </MenuItem>
                         </MenuHandler>
-                        <MenuList className="grid grid-cols-2 gap-4 outline-none bg-[#373b40] z-100 text-white ml-[3px] p-3 max-h-100 overflow-y-auto">
+                        <MenuList className="grid grid-cols-2 gap-4 outline-none border-none bg-[#373b40] z-100 text-white ml-[3px] p-3 max-h-100 overflow-y-auto">
                             {loading &&
                                 <MenuItem className="flex justify-center items-center col-span-2 h-full">
                                     <Loading width={30} height={30} className={""} />

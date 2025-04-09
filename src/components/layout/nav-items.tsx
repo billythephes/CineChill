@@ -1,14 +1,4 @@
-interface NavLinkItem {
-  id: number;
-  route: string;
-  name: string;
-}
-
-interface NavDropdownItem {
-  id: number;
-  api: string;
-  name: string;
-}
+import { NavLinkItem, NavDropdownItem } from "@/shared/interfaces/INavItem";
 
 export const navLink: NavLinkItem[] = [
   {

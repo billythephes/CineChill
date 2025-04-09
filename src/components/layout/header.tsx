@@ -35,7 +35,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-3 transition-colors duration-400 ${isScrolled ? 'bg-[#1a1a1a]' : 'bg-transparent'
+      className={`md:fixed relative top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-3 transition-colors duration-400 ${isScrolled ? 'bg-[#1a1a1a]' : 'md:bg-transparent bg-[#1a1a1a]'
         } text-white`}
     >
       {!isSearchOpen &&

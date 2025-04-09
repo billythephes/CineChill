@@ -13,8 +13,9 @@
     "@material-tailwind/react": "^2.1.10",
     "axios": "^1.8.4",
     "next": "15.2.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "swiper": "^11.2.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

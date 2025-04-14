@@ -1,15 +1,24 @@
-const withMT = require("@material-tailwind/react/utils/withMT");
+// const withMT = require("@material-tailwind/react/utils/withMT");
+import withMT from "@material-tailwind/react/utils/withMT.js";
  
-module.exports = withMT({
+export default withMT({
   content: [],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: ["@tailwindcss/postcss"],
 });
 
-const config = {
-  plugins: ["@tailwindcss/postcss"],
-};
+// module.exports = withMT({
+//   content: [],
+//   theme: {
+//     extend: {},
+//   },
+//   plugins: [],
+// });
 
-export default config;
+// const config = {
+//   plugins: ["@tailwindcss/postcss"],
+// };
+
+// export default config;

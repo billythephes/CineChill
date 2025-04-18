@@ -1,12 +1,13 @@
 export interface NavLinkItem {
     id: number;
-    route: string;
+    slug: string;
     name: string;
 }
 
 export interface NavDropdownItem {
     id: number;
     api: string;
+    slug: string;
     name: string;
 }
 

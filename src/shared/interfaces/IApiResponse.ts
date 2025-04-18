@@ -1,5 +1,6 @@
 import { Movie } from "@/shared/interfaces/IMovie";
 import { MovieDetail } from "@/shared/interfaces/IMovieDetail";
+import { Pagination } from "./IPagination";
 
 export interface ApiResponse {
     status: boolean | string;
@@ -8,6 +9,8 @@ export interface ApiResponse {
     data: Items;
 }
 
-interface Items {
+export interface Items {
+    titlePage: string;
     items: MovieDetail[];
+    params: Pagination;
 }

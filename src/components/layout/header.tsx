@@ -59,7 +59,7 @@ export default function Header() {
         {navLink.map((navLink) => (
           <Link
             key={navLink.id}
-            href={navLink.route}
+            href={`/danh-sach/${navLink.slug}`}
             className="hover:text-[#ffd875] transition-colors text-sm"
           >
             {navLink.name}

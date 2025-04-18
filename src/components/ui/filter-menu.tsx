@@ -9,11 +9,13 @@ import {
     MenuItem,
 } from "@material-tailwind/react";
 import Link from "next/link";
+import { NavDropdownItem } from "@/shared/interfaces/INavItem";
 import handleAPIs from "@/lib/api/handleAPI";
 import Loading from "./loading";
 import { Items } from "@/shared/interfaces/INavItem";
 
-export function FilterMenu({ navDropdown }: { navDropdown: any }) {
+
+export function FilterMenu({ navDropdown }: { navDropdown: NavDropdownItem }) {
     const [items, setItems] = useState<Items[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -51,7 +53,7 @@ export function FilterMenu({ navDropdown }: { navDropdown: any }) {
                 }
 
                 {items.map((item) => (
-                    <Link key={item._id} href={`/${item.slug}`} className="hover:text-[#ffd875] outline-none">
+                    <Link key={item._id} href={`/${navDropdown.slug}/${item.slug}`} className="hover:text-[#ffd875] outline-none">
                         <MenuItem>{item.name}</MenuItem>
                     </Link>
                 ))}

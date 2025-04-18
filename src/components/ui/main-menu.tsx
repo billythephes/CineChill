@@ -43,7 +43,7 @@ export function MainMenu() {
             </MenuHandler>
             <MenuList className="flex flex-col bg-[#373b40] outline-none border-none text-white z-100 mt-[14px] p-2">
                 {navLink.map((navLink) => (
-                    <Link href={navLink.route} key={navLink.id} className="hover:text-[#ffd875] outline-none">
+                    <Link href={`/danh-sach/${navLink.slug}`} key={navLink.id} className="hover:text-[#ffd875] outline-none">
                         <MenuItem className="text-left p-1">{navLink.name}</MenuItem>
                     </Link>
                 ))}
@@ -72,7 +72,7 @@ export function MainMenu() {
                             {items[index] && items[index].map((item) => (
                                 <Link
                                     key={item._id}
-                                    href={`/${item.slug}`}
+                                    href={`/${nav.slug}/${item.slug}`}
                                     className="hover:text-[#ffd875] outline-none">
                                     <MenuItem>{item.name}</MenuItem>
                                 </Link>

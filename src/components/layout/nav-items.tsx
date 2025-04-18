@@ -3,23 +3,23 @@ import { NavLinkItem, NavDropdownItem } from "@/shared/interfaces/INavItem";
 export const navLink: NavLinkItem[] = [
   {
     id: 1,
-    route: "/tv-shows",
-    name: "TV-Shows"
+    slug: "tv-shows",
+    name: "TV Shows"
   },
   {
     id: 2,
-    route: "/phim-le",
-    name: "Phim lẻ"
+    slug: "phim-le",
+    name: "Phim Lẻ"
   },
   {
     id: 3,
-    route: "/phim-bo",
-    name: "Phim bộ"
+    slug: "phim-bo",
+    name: "Phim Bộ"
   },
   {
     id: 4,
-    route: "/phim-dang-chieu",
-    name: "Phim đang chiếu"
+    slug: "hoat-hinh",
+    name: "Hoạt Hình"
   },
 ];
 
@@ -27,16 +27,19 @@ export const navDropdown: NavDropdownItem[] = [
   {
     id: 1,
     api: "https://phimapi.com/the-loai",
-    name: "Thể loại"
+    slug: "the-loai",
+    name: "Thể Loại"
   },
   {
     id: 2,
     api: "https://phimapi.com/quoc-gia",
-    name: "Quốc gia"
+    slug: "quoc-gia",
+    name: "Quốc Gia"
   },
   {
     id: 3,
     api: "http://localhost:3000/api/nam-phat-hanh",
+    slug: "nam",
     name: "Năm"
   },
 ]

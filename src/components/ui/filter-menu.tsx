@@ -2,12 +2,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import {
-    Menu,
-    MenuHandler,
-    MenuList,
-    MenuItem,
-} from "@material-tailwind/react";
+import { Menu, MenuHandler, MenuList, MenuItem } from "@material-tailwind/react";
 import Link from "next/link";
 import { NavDropdownItem } from "@/shared/interfaces/INavItem";
 import handleAPIs from "@/lib/api/handleAPI";
@@ -23,8 +18,6 @@ export function FilterMenu({ navDropdown }: { navDropdown: NavDropdownItem }) {
         const fetchData = async () => {
             try {
                 const response = await handleAPIs.getData(navDropdown.api);
-
-                console.log(response);
                 setItems(response);
             } catch (error) {
                 console.error('Error fetching data:', error);

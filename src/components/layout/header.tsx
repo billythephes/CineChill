@@ -1,8 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { UserIcon, ChevronDownIcon, Bars3CenterLeftIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/20/solid';
+import { UserIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/20/solid';
 import SearchBar from '../ui/search-bar';
 import { navLink, navDropdown } from './nav-items';
 import { MainMenu } from '../ui/main-menu';

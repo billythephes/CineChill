@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
 import React, { useEffect, useState } from "react";
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import Image from "next/image";
 import handleAPIs from "@/lib/api/handleAPI";
 import { ApiResponse, Items } from "@/shared/interfaces/IApiResponse";
@@ -10,20 +10,23 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 import Loading from "@/components/ui/loading";
 
 export default function DanhSach() {
-    const { slug } = useParams();
     const [data, setData] = useState<Items>();
     const [currentPage, setCurrentPage] = useState(1);
     const [inputPage, setInputPage] = useState('1');
-    const [isLoading, setIsLoading] = useState();
+    const [isLoading, setIsLoading] = useState(false);
 
-    if (!Array.isArray(slug) || slug?.length !== 2) 
+    const { slug } = useParams();
+    const searchParams = useSearchParams();
+    const page = Number(searchParams.get('page')) || 1;
+
+    if (!Array.isArray(slug) || slug?.length !== 2)
         return;
 
     const fetchData = async (pageNumber: number) => {
         setIsLoading(true);
         try {
             const response: ApiResponse = await handleAPIs.getData(
-                `https://phimapi.com/v1/api/${slug[0]}/${slug[1]}?page=${pageNumber}&sort_field=_id&sort_type=asc&limit=30`
+                `https://phimapi.com/v1/api/${slug[0]}/${slug[1]}?page=${pageNumber}&sort_field=modified.time&sort_type=desc&limit=30`
             );
             if (response.status) {
                 setData(response.data);
@@ -40,12 +43,15 @@ export default function DanhSach() {
     };
 
     useEffect(() => {
-        fetchData(1);
+        fetchData(page);
     }, [slug]);
 
     const handlePageChange = (newPage: number) => {
         if (newPage < 1 || newPage > (data?.params.pagination.totalPages || 1)) return;
-        fetchData(newPage);
+        const currentParams = new URLSearchParams(searchParams.toString());
+        currentParams.set('page', newPage.toString());
+
+        window.history.pushState(null, '', `?${currentParams.toString()}`);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -157,7 +163,11 @@ export default function DanhSach() {
                                 <div className="flex flex-col gap-1">
                                     <Link href={`/phim/${item.slug}`}
                                         className="text-xs sm:text-sm text-center hover:text-[#ffd875]">
-                                        {item.name.length > 27 ? item.name.slice(0, 27) + '...' : item.name}
+                                        <p dangerouslySetInnerHTML={{
+                                            __html: item.name.length > 26
+                                                ? item.name.slice(0, 26) + '...'
+                                                : item.name
+                                        }} />
                                     </Link>
 
                                     <Link href={`/phim/${item.slug}`}

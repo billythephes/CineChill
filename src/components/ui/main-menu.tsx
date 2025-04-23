@@ -2,12 +2,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { ChevronRightIcon, Bars3CenterLeftIcon } from "@heroicons/react/24/solid";
-import {
-    Menu,
-    MenuHandler,
-    MenuList,
-    MenuItem,
-} from "@material-tailwind/react";
+import { Menu, MenuHandler, MenuList, MenuItem } from "@material-tailwind/react";
 import { navLink, navDropdown } from "../layout/nav-items";
 import Link from "next/link";
 import handleAPIs from "@/lib/api/handleAPI";
@@ -24,8 +19,6 @@ export function MainMenu() {
                 // Create array of Promises to fetch data from all URLs
                 const promises = navDropdown.map(nav => handleAPIs.getData(nav.api));
                 const data = await Promise.all(promises);
-
-                console.log(data);
                 setItems(data);
             } catch (error) {
                 console.error('Error fetching data:', error);

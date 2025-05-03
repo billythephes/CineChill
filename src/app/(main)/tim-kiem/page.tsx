@@ -17,7 +17,7 @@ export default function TimKiem() {
     const [isLoading, setIsLoading] = useState(false);
 
     const searchParams = useSearchParams();
-    const query = String(searchParams.get('query')) || "";
+    const query = String(searchParams.get('q')) || "";
 
     const fetchData = async (pageNumber: number) => {
         setIsLoading(true);
@@ -87,6 +87,7 @@ export default function TimKiem() {
                                     <Image
                                         src={`https://phimimg.com/${item.poster_url}`}
                                         alt={item.name}
+                                        title={item.name}
                                         loading="lazy"
                                         fill
                                         sizes="(max-width: 205px) 100vw"
@@ -159,6 +160,7 @@ export default function TimKiem() {
 
                                 <div className="flex flex-col gap-1">
                                     <Link href={`/phim/${item.slug}`}
+                                        title={item.name}
                                         className="text-xs sm:text-sm text-center hover:text-[#ffd875]">
                                         <p dangerouslySetInnerHTML={{
                                             __html: item.name.length > 26
@@ -168,6 +170,7 @@ export default function TimKiem() {
                                     </Link>
 
                                     <Link href={`/phim/${item.slug}`}
+                                        title={item.origin_name}
                                         className="text-xs sm:text-sm text-center text-[#AAAAAA]">
                                         <p dangerouslySetInnerHTML={{
                                             __html: item.origin_name.length > 27

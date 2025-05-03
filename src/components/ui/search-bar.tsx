@@ -69,7 +69,7 @@ export default function SearchBar({ isSearchOpen }: { isSearchOpen: boolean }) {
         <div className={`relative ${isSearchOpen ? 'flex-grow' : 'flex hidden xl:block'}`} ref={searchRef}>
             <Form action={"/tim-kiem"} onSubmit={handleCloseSearch}>
                 <input
-                    name="query"
+                    name="q"
                     value={query}
                     className="peer block w-full rounded-md py-[10px] pl-10 pr-10 text-sm text-white bg-[#FFFFFF14]"
                     placeholder="Tìm kiếm phim"
@@ -100,6 +100,7 @@ export default function SearchBar({ isSearchOpen }: { isSearchOpen: boolean }) {
                                 <Link
                                     key={index}
                                     href={`/phim/${item.slug}`}
+                                    onClick={handleCloseSearch}
                                     className="flex flex-row items-center gap-3.5 hover:opacity-75 cursor-pointer"
                                 >
                                     <img
@@ -135,7 +136,7 @@ export default function SearchBar({ isSearchOpen }: { isSearchOpen: boolean }) {
                                 </Link>
                             ))}
 
-                            <Link href={`/tim-kiem?query=${query}`}
+                            <Link href={`/tim-kiem?q=${query}`}
                                 className="absolute top-full left-0 right-0 flex justify-center text-sm hover:text-[#ffd875] bg-[#25272f] cursor-pointer rounded-b-md py-3.5"
                                 onClick={handleCloseSearch}>
                                 <p>Toàn bộ kết quả</p>

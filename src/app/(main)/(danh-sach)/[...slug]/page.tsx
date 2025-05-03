@@ -90,6 +90,7 @@ export default function DanhSach() {
                                     <Image
                                         src={`https://phimimg.com/${item.poster_url}`}
                                         alt={item.name}
+                                        title={item.name}
                                         loading="lazy"
                                         fill
                                         sizes="(max-width: 205px) 100vw"
@@ -162,6 +163,7 @@ export default function DanhSach() {
 
                                 <div className="flex flex-col gap-1">
                                     <Link href={`/phim/${item.slug}`}
+                                        title={item.name}
                                         className="text-xs sm:text-sm text-center hover:text-[#ffd875]">
                                         <p dangerouslySetInnerHTML={{
                                             __html: item.name.length > 26
@@ -171,6 +173,7 @@ export default function DanhSach() {
                                     </Link>
 
                                     <Link href={`/phim/${item.slug}`}
+                                        title={item.origin_name}
                                         className="text-xs sm:text-sm text-center text-[#AAAAAA]">
                                         <div dangerouslySetInnerHTML={{
                                             __html: item.origin_name.length > 27

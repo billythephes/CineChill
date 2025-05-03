@@ -30,10 +30,10 @@ export default function ToTopButton() {
     return (
         <button
             onClick={scrollToTop}
-            className={`fixed bottom-4 right-4 bg-white text-black p-4 rounded-2xl transition-opacity duration-300 ${isVisible ? 'opacity-150 cursor-pointer' : 'opacity-0 pointer-events-none'}`}
+            className={`fixed bottom-4 right-4 group z-100 bg-white text-black p-4 rounded-2xl transition-opacity duration-300 ${isVisible ? 'opacity-150 cursor-pointer' : 'opacity-0 pointer-events-none'}`}
             style={{ transition: 'opacity 0.3s ease' }}
         >
-            <ArrowUpIcon className='block w-5 h-5 transition-transform duration-200 hover:translate-y-[-2px]' />
+            <ArrowUpIcon className='block w-5 h-5 transition-transform duration-200 group-hover:translate-y-[-2px]' />
         </button>
     );
 };

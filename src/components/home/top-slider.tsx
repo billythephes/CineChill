@@ -12,6 +12,7 @@ import { MovieDetail } from "@/shared/interfaces/IMovieDetail";
 import { ApiResponse } from "@/shared/interfaces/IApiResponse";
 import Loading from "../ui/loading";
 import { motion, AnimatePresence } from "framer-motion";
+import { getRandomElements } from "@/lib/utils";
 
 // Error boundary component to catch rendering errors
 interface ErrorBoundaryState {
@@ -136,15 +137,6 @@ export default function TopSlider() {
         };
         fetchData();
     }, []);
-
-    const getRandomElements = (array: MovieDetail[], count: number) => {
-        if (!Array.isArray(array) || array.length === 0) {
-            return [];
-        }
-
-        const shuffled = [...array].sort(() => Math.random() - 0.5);
-        return shuffled.slice(0, Math.min(count, array.length));
-    };
 
     useEffect(() => {
         if (data.length > 0) {

@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
@@ -6,13 +7,14 @@ import { MovieDetail } from '@/shared/interfaces/IMovieDetail';
 import { ApiResponse } from '@/shared/interfaces/IApiResponse';
 import handleAPIs from '@/lib/api/handleAPI';
 import Link from 'next/link';
-import { ChatBubbleBottomCenterTextIcon, HeartIcon, PlayIcon, PlusIcon, StarIcon } from '@heroicons/react/24/solid';
+import { PlayIcon } from '@heroicons/react/24/solid';
 import { Episode } from '@/shared/interfaces/IEpisode';
 import Tags from '@/components/movie/tags';
 import Status from '@/components/movie/status';
 import Episodes from '@/components/movie/episodes';
 import Comments from '@/components/movie/comments';
 import Loading from "@/components/ui/loading";
+import { AddButton, CommentButton, FavoriteButton, RatingButton, ShareButton } from '@/components/movie/buttons';
 
 export default function Phim() {
     const [data, setData] = useState<MovieDetail>();
@@ -68,7 +70,7 @@ export default function Phim() {
 
             <div className="sm:mx-8.5 px-4 -mt-47.5 lg:-mt-75 relative z-10">
                 <div className="flex flex-col lg:flex-row items-center lg:items-start">
-                    <div className="relative w-[120px] h-[180px] lg:w-48 lg:h-72 overflow-hidden lg:mb-0">
+                    <div className="relative w-[120px] h-[180px] lg:w-48 lg:h-72 overflow-hidden">
                         <Image
                             src={data.poster_url}
                             alt={data.name}
@@ -96,35 +98,34 @@ export default function Phim() {
                             </Link>
 
                             <div className='flex flex-row items-center space-x-2 xs:space-x-4 sm:space-x-6 lg:space-x-5.5 xl:space-x-6'>
-                                <button className="group hover:bg-[#FFFFFF10] text-[13px] flex flex-col items-center gap-1 p-2 rounded-xl">
-                                    <HeartIcon className="h-5 w-5 group-hover:text-[#ffd875]" />
-                                    <span>Yêu thích</span>
-                                </button>
+                                <FavoriteButton
+                                    btnClass="flex flex-col items-center group hover:bg-[#FFFFFF10] text-[13px] gap-1 p-2 rounded-xl"
+                                    iconClass="h-5 w-5 group-hover:text-[#ffd875]"
+                                    txtClass={''}
+                                />
 
-                                <button className="group hover:bg-[#FFFFFF10] text-[13px] flex flex-col items-center gap-1 p-1.5 rounded-xl ">
-                                    <PlusIcon className="h-5 w-5 group-hover:text-[#ffd875]" />
-                                    <span>Thêm vào</span>
-                                </button>
+                                <AddButton
+                                    btnClass="flex flex-col items-center group hover:bg-[#FFFFFF10] text-[13px] gap-1 p-2 rounded-xl"
+                                    iconClass="h-5 w-5 group-hover:text-[#ffd875]"
+                                    txtClass={''}
+                                />
 
-                                <button className="group hover:bg-[#FFFFFF10] text-[13px] flex flex-col items-center gap-1 p-2 rounded-xl">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 group-hover:text-[#ffd875]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                                    </svg>
-                                    <span>Chia sẻ</span>
-                                </button>
+                                <ShareButton
+                                    btnClass="flex flex-col items-center group hover:bg-[#FFFFFF10] text-[13px] gap-1 p-2 rounded-xl"
+                                    iconClass="h-5 w-5 group-hover:text-[#ffd875]"
+                                    txtClass={''}
+                                />
 
-                                <button className="group hover:bg-[#FFFFFF10] text-[13px] hidden xs:flex flex-col items-center gap-1 p-1.5 rounded-xl cursor-pointer"
+                                <CommentButton
+                                    btnClass="xs:flex hidden flex-col items-center group hover:bg-[#FFFFFF10] text-[13px] gap-1 p-2 rounded-xl cursor-pointer"
+                                    iconClass="h-5 w-5 group-hover:text-[#ffd875]"
                                     onClick={scrollToComments}
-                                >
-                                    <ChatBubbleBottomCenterTextIcon className="h-5 w-5 group-hover:text-[#ffd875]" />
-                                    <span>Bình luận</span>
-                                </button>
+                                />
 
-                                <div className="flex flex-row items-center bg-[#3556b6] group gap-2 pr-4 px-3 py-2 ml-2.5 lg:ml-6 rounded-full">
-                                    <StarIcon className="h-5 w-5 text-yellow-500" />
-                                    <span className="text-lg font-bold">{data.tmdb.vote_average.toFixed(1)}</span>
-                                    <span className="hidden sm:block text-xs group-hover:underline">Đánh giá</span>
-                                </div>
+                                <RatingButton
+                                    btnClass="flex flex-row items-center bg-[#3556b6] group gap-2.5 pr-3.5 px-3 py-2 ml-2.5 lg:ml-6 rounded-full"
+                                    voteAverage={data.tmdb.vote_average}
+                                />
                             </div>
                         </div>
                     </div>

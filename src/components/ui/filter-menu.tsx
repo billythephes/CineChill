@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
 import React, { useEffect, useState } from "react";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { ChevronDownIcon } from "@heroicons/react/16/solid";
 import { Menu, MenuHandler, MenuList, MenuItem } from "@material-tailwind/react";
 import Link from "next/link";
 import { NavDropdownItem } from "@/shared/interfaces/INavItem";

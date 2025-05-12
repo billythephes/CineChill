@@ -2,7 +2,8 @@
 "use client";
 import Form from "next/form";
 import { useEffect, useRef, useState } from "react";
-import { MagnifyingGlassIcon, XCircleIcon } from '@heroicons/react/20/solid';
+import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
+import { XCircleIcon } from "@heroicons/react/20/solid";
 import handleAPIs from "@/lib/api/handleAPI";
 import { MovieDetail } from "@/shared/interfaces/IMovieDetail";
 import { ApiResponse } from "@/shared/interfaces/IApiResponse";
@@ -78,7 +79,7 @@ export default function SearchBar({ isSearchOpen }: { isSearchOpen: boolean }) {
                 />
             </Form>
 
-            <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-white pointer-events-none" />
+            <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[20px] w-[20px] -translate-y-1/2 text-white pointer-events-none" />
 
             {hasQuery && (
                 <XCircleIcon

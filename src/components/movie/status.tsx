@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { MovieDetail } from "@/shared/interfaces/IMovieDetail";
+import { CheckCircleIcon } from "@heroicons/react/20/solid";
 
 export default function Status({ data }: { data: MovieDetail }) {
 

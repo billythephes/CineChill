@@ -6,7 +6,8 @@ import Image from "next/image";
 import handleAPIs from "@/lib/api/handleAPI";
 import { ApiResponse, Items } from "@/shared/interfaces/IApiResponse";
 import Link from "next/link";
-import { ArrowLeftIcon, ArrowRightIcon, MagnifyingGlassCircleIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { MagnifyingGlassCircleIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/16/solid";
 import Loading from "@/components/ui/loading";
 import { escapeHtmlAndEncodeSpaces } from "@/lib/utils";
 
@@ -188,7 +189,7 @@ export default function TimKiem() {
                             onClick={() => handlePageChange(currentPage - 1)}
                             disabled={currentPage === 1 || isLoading}
                         >
-                            <ArrowLeftIcon className="w-4.5 h-4.5" />
+                            <ArrowLeftIcon className="w-5 h-5" />
                         </button>
 
                         <div className="flex flex-row items-center gap-3 bg-[#2F3346] rounded-full px-5 py-3 mx-2">
@@ -207,7 +208,7 @@ export default function TimKiem() {
                             onClick={() => handlePageChange(currentPage + 1)}
                             disabled={currentPage === (data?.params.pagination.totalPages || 1) || isLoading}
                         >
-                            <ArrowRightIcon className="w-4.5 h-4.5" />
+                            <ArrowRightIcon className="w-5 h-5" />
                         </button>
                     </div>
                 </>

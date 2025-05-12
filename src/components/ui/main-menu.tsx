@@ -1,7 +1,8 @@
 // @ts-nocheck
 "use client";
 import React, { useEffect, useState } from "react";
-import { ChevronRightIcon, Bars3CenterLeftIcon } from "@heroicons/react/24/solid";
+import { ChevronRightIcon } from "@heroicons/react/16/solid";
+import { Bars3CenterLeftIcon } from "@heroicons/react/20/solid";
 import { Menu, MenuHandler, MenuList, MenuItem } from "@material-tailwind/react";
 import { navLink, navDropdown } from "../layout/nav-items";
 import Link from "next/link";
@@ -51,7 +52,7 @@ export function MainMenu() {
                             <MenuItem>
                                 {nav.name}
                                 <ChevronRightIcon
-                                    className='h-3 w-3 transition-transform'
+                                    className='h-4 w-4 transition-transform'
                                 />
                             </MenuItem>
                         </MenuHandler>

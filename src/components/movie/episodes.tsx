@@ -7,9 +7,9 @@ export default function Episodes({ episode, data }: { episode: Episode[], data: 
         <div className="space-y-6">
             {episode.map((server, serverIndex) => (
                 <div className='flex flex-col gap-4' key={serverIndex}>
-                    <p className='font-bold'>
-                        Server:&nbsp;
-                        <span className='font-medium text-[#ffd875]'>
+                    <p className='font-medium'>
+                        <span className="text-xl">Server:&nbsp;</span>
+                        <span className='text-[#ffd875]'>
                             &nbsp;{server.server_name}
                         </span>
                     </p>
@@ -18,7 +18,7 @@ export default function Episodes({ episode, data }: { episode: Episode[], data: 
                         {server.server_data.map((ep, episodeIndex) => (
                             <Link
                                 key={episodeIndex}
-                                href={`/xem-phim/${data.slug}?ep=${ep.slug}`}
+                                href={`/xem-phim/${data.slug}?ver=${serverIndex + 1}&ep=${episodeIndex + 1}`}
                                 className="bg-[#282B3A] hover:text-[#ffd875] text-sm py-1 rounded-sm text-center">
                                 {ep.name}
                             </Link>

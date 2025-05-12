@@ -13,10 +13,10 @@ export default function Comments({ scrollRef }: { scrollRef: React.RefObject<HTM
     return (
         <div ref={scrollRef} className="mt-12">
             <div className="flex flex-row items-center mb-4 gap-4">
-                <ChatBubbleBottomCenterTextIcon className="h-7 w-7 mt-1.5" />
-                <p className="text-2xl font-medium">
+                <ChatBubbleBottomCenterTextIcon className="h-6.5 w-6.5 xs:h-7 xs:w-7 mt-1.5" />
+                <p className="text-[21px] xs:text-2xl font-medium">
                     <span>Bình luận</span>
-                    <span> (0)</span>
+                    <span>&nbsp;(0)</span>
                 </p>
             </div>
 

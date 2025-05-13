@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 
 export default function VideoPlayer({ videoUrl, thumbUrl }: { videoUrl: string, thumbUrl: string }) {
     const iframeRef = useRef<HTMLIFrameElement>(null);
-    const [videoError, setVideoError] = useState(true);
+    const [videoError, setVideoError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {

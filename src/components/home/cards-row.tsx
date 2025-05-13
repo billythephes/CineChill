@@ -131,22 +131,14 @@ export default function CardsRow({ title, type_list, page, sort_field, sort_type
                                 <div className="flex flex-col gap-1">
                                     <Link href={`/phim/${item.slug}`}
                                         title={item.name}
-                                        className="text-xs sm:text-sm text-center hover:text-[#ffd875]">
-                                        <p dangerouslySetInnerHTML={{
-                                            __html: item.name.length > 26
-                                                ? item.name.slice(0, 26) + '...'
-                                                : item.name
-                                        }} />
+                                        className="text-xs sm:text-sm text-center hover:text-[#ffd875] line-clamp-1">
+                                        <p dangerouslySetInnerHTML={{ __html: item.name }} />
                                     </Link>
 
                                     <Link href={`/phim/${item.slug}`}
                                         title={item.origin_name}
-                                        className="text-xs sm:text-sm text-center text-[#AAAAAA]">
-                                        <div dangerouslySetInnerHTML={{
-                                            __html: item.origin_name.length > 26
-                                                ? item.origin_name.slice(0, 26) + '...'
-                                                : item.origin_name
-                                        }} />
+                                        className="text-xs sm:text-sm text-center text-[#AAAAAA] line-clamp-1">
+                                        <p dangerouslySetInnerHTML={{ __html: item.origin_name }} />
                                     </Link>
                                 </div>
 

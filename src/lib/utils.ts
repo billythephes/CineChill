@@ -1,5 +1,3 @@
-import { MovieDetail } from "@/shared/interfaces/IMovieDetail";
-
 const he = require('he');
 
 export const escapeHtmlAndEncodeSpaces = (query: string) => {
@@ -8,11 +6,11 @@ export const escapeHtmlAndEncodeSpaces = (query: string) => {
     return escapedQuery;
 }
 
-export const getRandomElements = (array: MovieDetail[], count: number) => {
+export const getRandomElements = (array: any[], count: number) => {
         if (!Array.isArray(array) || array.length === 0) {
             return [];
         }
-
+        
         const shuffled = [...array].sort(() => Math.random() - 0.5);
         return shuffled.slice(0, Math.min(count, array.length));
     };

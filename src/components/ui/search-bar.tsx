@@ -113,14 +113,13 @@ export default function SearchBar({ isSearchOpen }: { isSearchOpen: boolean }) {
                                     </img>
 
                                     <div className="flex flex-col justify-between gap-1.5 text-[13px] sm:text-sm">
-                                        <p dangerouslySetInnerHTML={{ __html: item.name }} />
+                                        <p className="line-clamp-2"
+                                            dangerouslySetInnerHTML={{ __html: item.name }}
+                                        />
 
-                                        <p className="text-[#AAAAAA]"
-                                            dangerouslySetInnerHTML={{
-                                                __html: item.origin_name.length > 40
-                                                    ? item.origin_name.slice(0, 40) + '...'
-                                                    : item.origin_name
-                                            }} />
+                                        <p className="text-[#AAAAAA] line-clamp-1"
+                                            dangerouslySetInnerHTML={{ __html: item.origin_name }}
+                                        />
 
                                         <div className="flex flex-row items-center text-center text-[#AAAAAA] gap-2">
                                             <span>{item.year}</span>

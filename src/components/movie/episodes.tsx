@@ -2,7 +2,9 @@ import Link from "next/link";
 import { MovieDetail } from "@/shared/interfaces/IMovieDetail";
 import { Episode } from "@/shared/interfaces/IEpisode";
 
-export default function Episodes({ episode, data }: { episode: Episode[], data: MovieDetail }) {
+export default function Episodes({ episode, data, ver, ep }: { episode: Episode[], data: MovieDetail, ver: number, ep: number }) {
+    const currentVersion = ver - 1;
+    const currentEpisode = ep - 1;
     return (
         <div className="space-y-6">
             {episode.map((server, serverIndex) => (
@@ -19,7 +21,8 @@ export default function Episodes({ episode, data }: { episode: Episode[], data: 
                             <Link
                                 key={episodeIndex}
                                 href={`/xem-phim/${data.slug}?ver=${serverIndex + 1}&ep=${episodeIndex + 1}`}
-                                className="bg-[#282B3A] hover:text-[#ffd875] text-sm py-1 rounded-sm text-center">
+                                className={`${serverIndex === currentVersion && episodeIndex === currentEpisode ? "text-[#ffd875]" : ""}
+                                        bg-[#282B3A] hover:text-[#ffd875] text-sm py-1 rounded-sm text-center`}>
                                 {ep.name}
                             </Link>
                         ))}

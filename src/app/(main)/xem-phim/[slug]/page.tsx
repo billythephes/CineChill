@@ -16,6 +16,8 @@ import Tags from '@/components/movie/tags';
 import Status from '@/components/movie/status';
 import Episodes from '@/components/movie/episodes';
 import Comments from '@/components/movie/comments';
+import MovieRecommender from '@/components/movie/movie-recommender';
+import { getRandomElements } from '@/lib/utils';
 
 export default function XemPhim() {
     const [data, setData] = useState<MovieDetail>();
@@ -70,7 +72,7 @@ export default function XemPhim() {
     );
 
     return (
-        <div className={`mx-5 mb-40 ${isTheaterMode ? 'relative' : ''}`}>
+        <div className={`mx-5 mb-25 ${isTheaterMode ? 'relative' : ''}`}>
             {isTheaterMode && (
                 <div className="fixed inset-0 bg-black/95 z-51" />
             )}
@@ -163,7 +165,7 @@ export default function XemPhim() {
 
                     <hr className={`hidden xl:block text-[#272932] ${data.episode_current !== "Full" ? 'mt-4 mb-7' : data.category.length < 6 ? 'mt-3 mb-7.5' : 'mt-1 mb-7.5'} `} />
                     <div className='xl:hidden mt-8' />
-                    <Episodes episode={episode} data={data} />
+                    <Episodes episode={episode} data={data} ver={ver} ep={ep} />
                     <Comments scrollRef={commentSectionRef} />
                 </div>
 
@@ -184,8 +186,21 @@ export default function XemPhim() {
                             voteAverage={data.tmdb.vote_average}
                         />
                     </div>
-                    
-                    <hr className='hidden lg:block text-[#272932] my-6 -ml-5 xl:-ml-4' />
+
+                    <hr className='text-[#272932] my-6 lg:-ml-5 xl:-ml-4' />
+
+                    <div className='lg:-ml-5 xl:-ml-4'>
+                        <MovieRecommender
+                            type={data.type}
+                            page={1} sort_field={''}
+                            sort_type={''}
+                            sort_lang={''}
+                            category={getRandomElements(data.category, 1)[0].slug}
+                            country={getRandomElements(data.country, 1)[0].slug}
+                            year={2025}
+                            limit={6}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

@@ -15,6 +15,8 @@ import Episodes from '@/components/movie/episodes';
 import Comments from '@/components/movie/comments';
 import Loading from "@/components/ui/loading";
 import { AddButton, CommentButton, FavoriteButton, RatingButton, ShareButton } from '@/components/movie/buttons';
+import MovieRecommender from '@/components/movie/movie-recommender';
+import { getRandomElements } from '@/lib/utils';
 
 export default function Phim() {
     const [data, setData] = useState<MovieDetail>();
@@ -80,8 +82,8 @@ export default function Phim() {
                     </div>
 
                     <div className="flex flex-col items-center lg:items-start lg:ml-8">
-                        <p className={`text-xl sm:text-2xl lg:text-3xl text-center font-medium lg:font-bold mb-2 mt-5 ${data.episode_current !== "Full" ? 'lg:mt-0' : ''} `}>{data.name}</p>
-                        <p className="text-sm sm:text-base text-center text-[#ffd875] mb-4">{data.origin_name}</p>
+                        <p className={`text-xl sm:text-2xl lg:text-3xl font-medium lg:font-bold mb-2 mt-5 ${data.episode_current !== "Full" ? 'lg:mt-0' : ''} `}>{data.name}</p>
+                        <p className="text-sm sm:text-base text-[#ffd875] mb-4">{data.origin_name}</p>
 
                         <Tags data={data} />
 
@@ -167,14 +169,28 @@ export default function Phim() {
                                 </Link>
                             ))}
                         </div>
+
+                        <div className='hidden lg:block'>
+                            <hr className='text-[#272932] my-4' />
+                            <MovieRecommender
+                                _id={data._id}
+                                type={data.type}
+                                page={1} sort_field={''}
+                                sort_type={''}
+                                sort_lang={''}
+                                category={getRandomElements(data.category, 1)[0].slug}
+                                country={getRandomElements(data.country, 1)[0].slug}
+                                year={2025}
+                                limit={7}
+                            />
+                        </div>
                     </div>
 
                     <div className='flex-2'>
-                        <Episodes episode={episode} data={data} />
+                        <Episodes episode={episode} data={data} ver={0} ep={0} />
+                        <Comments scrollRef={commentSectionRef} />
                     </div>
                 </div>
-
-                <Comments scrollRef={commentSectionRef} />
             </div>
         </div>
     );

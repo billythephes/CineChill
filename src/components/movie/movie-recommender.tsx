@@ -6,8 +6,8 @@ import { ApiResponse } from "@/shared/interfaces/IApiResponse";
 import Link from "next/link";
 import Loading from "@/components/ui/loading";
 
-export default function MovieRecommender({ type, page, sort_field, sort_type, sort_lang, category, country, year, limit }:
-    { type: string; page: number; sort_field: string; sort_type: string; sort_lang: string; category: string; country: string; year: number; limit: number }) {
+export default function MovieRecommender({ _id, type, page, sort_field, sort_type, sort_lang, category, country, year, limit }:
+    { _id: string, type: string; page: number; sort_field: string; sort_type: string; sort_lang: string; category: string; country: string; year: number; limit: number }) {
     const [data, setData] = useState<MovieDetail[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -22,7 +22,15 @@ export default function MovieRecommender({ type, page, sort_field, sort_type, so
             try {
                 const response: ApiResponse = await handleAPIs.getData(`https://phimapi.com/v1/api/danh-sach/${type_list}?page=${page}&sort_field=${sort_field}&sort_type=${sort_type}&sort_lang=${sort_lang}&category=${category}&country=${country}&year=${year}&limit=${limit}`);
                 if (response.status) {
-                    setData(response.data.items as MovieDetail[]);
+                    let data = response.data.items as MovieDetail[];
+
+                    if (data.some((item) => item._id === _id)) {
+                        data = data.filter((item) => item._id !== _id);
+                    } else {
+                        data.pop();
+                    }
+
+                    setData(data);
                 } else {
                     console.error('No data found');
                 }
@@ -34,6 +42,8 @@ export default function MovieRecommender({ type, page, sort_field, sort_type, so
         };
         fetchData();
     }, []);
+
+
 
     return (
         <>

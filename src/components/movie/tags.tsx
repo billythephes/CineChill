@@ -18,7 +18,7 @@ export default function Tags({ data }: { data: MovieDetail }) {
                 <span className="border border-white bg-[#FFFFFF10] sm:px-1.5 sm:py-1 rounded px-1 py-0.25">{data.lang}</span>
             </div>
 
-            <div className={`flex flex-wrap gap-3 ${data.episode_current === "Full" ? 'mb-8' : ''} `}>
+            <div className={`flex flex-wrap max-xs:justify-center gap-3 ${data.episode_current === "Full" ? 'mb-8' : ''} `}>
                 {data.category.map((category, index) => (
                     <Link key={index}
                         href={`/the-loai/${category.slug}`}

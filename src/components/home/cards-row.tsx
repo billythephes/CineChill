@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
 import React, { useEffect, useState } from "react";
-import { ChevronRightIcon } from "@heroicons/react/24/solid";
+import { ChevronRightIcon, PlayIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import handleAPIs from "@/lib/api/handleAPI";
 import { MovieDetail } from "@/shared/interfaces/IMovieDetail";
@@ -53,7 +53,7 @@ export default function CardsRow({ title, type_list, page, sort_field, sort_type
                         {data.map((item, index) => (
                             <div key={index} className="flex flex-col items-center gap-4">
                                 <Link href={`/phim/${item.slug}`}
-                                    className="relative flex-shrink-0 hover:opacity-80 xl:w-[205px] xl:h-[310px] lg:w-[180px] lg:h-[270px] md:w-[150px] md:h-[230px] sm:w-[120px] sm:h-[180px] w-[100px] h-[150px]">
+                                    className="relative flex-shrink-0 group xl:w-[205px] xl:h-[310px] lg:w-[180px] lg:h-[270px] md:w-[150px] md:h-[230px] sm:w-[120px] sm:h-[180px] w-[100px] h-[150px]">
                                     <Image
                                         src={`https://phimimg.com/${item.poster_url}`}
                                         alt={item.name}
@@ -61,8 +61,14 @@ export default function CardsRow({ title, type_list, page, sort_field, sort_type
                                         loading="lazy"
                                         fill
                                         sizes="(max-width: 205px) 100vw"
-                                        className="rounded-lg object-cover">
+                                        className="rounded-lg object-cover group-hover:opacity-65">
                                     </Image>
+
+                                    <div title={item.name}
+                                        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-[#ffd875] bg-[#00000066] p-2 sm:p-3 md:p-4 rounded-full
+                                                    opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 ease-in-out">
+                                        <PlayIcon className="h-8 w-8 pl-0.5 text-[#ffd875]" />
+                                    </div>
 
                                     <div className="absolute flex flex-row items-center bottom-0 left-1/2 transform -translate-x-1/2 text-[9px] sm:text-[11px]">
                                         {item.lang === 'Vietsub' && (

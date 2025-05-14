@@ -6,7 +6,7 @@ import Image from "next/image";
 import handleAPIs from "@/lib/api/handleAPI";
 import { ApiResponse, Items } from "@/shared/interfaces/IApiResponse";
 import Link from "next/link";
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/16/solid";
+import { ArrowLeftIcon, ArrowRightIcon, PlayIcon } from "@heroicons/react/16/solid";
 import Loading from "@/components/ui/loading";
 
 export default function DanhSach() {
@@ -86,7 +86,7 @@ export default function DanhSach() {
                         {data?.items.map((item, index) => (
                             <div key={index} className="flex flex-col items-center gap-3">
                                 <Link href={`/phim/${item.slug}`}
-                                    className="relative flex-shrink-0 hover:opacity-80 xl:w-[200px] xl:h-[300px] lg:w-[180px] lg:h-[270px] md:w-[175px] md:h-[263px] sm:w-[150px] sm:h-[230px] w-[155px] h-[233px]">
+                                    className="relative flex-shrink-0 group xl:w-[200px] xl:h-[300px] lg:w-[180px] lg:h-[270px] md:w-[175px] md:h-[263px] sm:w-[150px] sm:h-[230px] w-[155px] h-[233px]">
                                     <Image
                                         src={`https://phimimg.com/${item.poster_url}`}
                                         alt={item.name}
@@ -94,8 +94,14 @@ export default function DanhSach() {
                                         loading="lazy"
                                         fill
                                         sizes="(max-width: 205px) 100vw"
-                                        className="rounded-lg object-cover">
+                                        className="rounded-lg object-cover group-hover:opacity-65">
                                     </Image>
+
+                                    <div title={item.name}
+                                        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-[#ffd875] bg-[#00000066] p-3.5 sm:p-4.5 rounded-full
+                                                    opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 ease-in-out">
+                                        <PlayIcon className="h-8 w-8 pl-0.5 text-[#ffd875]" />
+                                    </div>
 
                                     <div className="absolute flex flex-row items-center bottom-0 left-1/2 transform -translate-x-1/2 text-[9px] sm:text-[11px]">
                                         {item.lang === 'Vietsub' && (

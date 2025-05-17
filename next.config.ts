@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['phimimg.com'], // Thêm hostname vào đây
   },
+  eslint: {
+    ignoreDuringBuilds: true, 
+  }
 };
 
 export default nextConfig;

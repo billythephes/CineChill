@@ -1,3 +1,7 @@
+import { Category } from "@/shared/interfaces/ICategory";
+import { Country } from "@/shared/interfaces/ICountry";
+import { MovieDetail } from "@/shared/interfaces/IMovieDetail";
+
 const he = require('he');
 
 export const escapeHtmlAndEncodeSpaces = (query: string) => {
@@ -6,7 +10,7 @@ export const escapeHtmlAndEncodeSpaces = (query: string) => {
     return escapedQuery;
 }
 
-export const getRandomElements = (array: any[], count: number) => {
+export const getRandomElements = (array: MovieDetail[] | Category[] | Country[], count: number) => {
         if (!Array.isArray(array) || array.length === 0) {
             return [];
         }

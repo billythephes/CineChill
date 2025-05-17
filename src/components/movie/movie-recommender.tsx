@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useEffect, useState } from "react";
 import handleAPIs from "@/lib/api/handleAPI";
 import { MovieDetail } from "@/shared/interfaces/IMovieDetail";
@@ -20,7 +19,7 @@ export default function MovieRecommender({ _id, type, page, sort_field, sort_typ
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                const response: ApiResponse = await handleAPIs.getData(`https://phimapi.com/v1/api/danh-sach/${type_list}?page=${page}&sort_field=${sort_field}&sort_type=${sort_type}&sort_lang=${sort_lang}&category=${category}&country=${country}&year=${year}&limit=${limit}`);
+                const response = await handleAPIs.getData(`https://phimapi.com/v1/api/danh-sach/${type_list}?page=${page}&sort_field=${sort_field}&sort_type=${sort_type}&sort_lang=${sort_lang}&category=${category}&country=${country}&year=${year}&limit=${limit}`) as ApiResponse;
                 if (response.status) {
                     let data = response.data.items as MovieDetail[];
 

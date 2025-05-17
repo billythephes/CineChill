@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client";
 import React, { useEffect, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/16/solid";
@@ -9,7 +8,6 @@ import handleAPIs from "@/lib/api/handleAPI";
 import Loading from "./loading";
 import { Items } from "@/shared/interfaces/INavItem";
 
-
 export function FilterMenu({ navDropdown }: { navDropdown: NavDropdownItem }) {
     const [items, setItems] = useState<Items[]>([]);
     const [loading, setLoading] = useState(true);
@@ -18,7 +16,7 @@ export function FilterMenu({ navDropdown }: { navDropdown: NavDropdownItem }) {
         const fetchData = async () => {
             try {
                 const response = await handleAPIs.getData(navDropdown.api);
-                setItems(response);
+                setItems(response as Items[]);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -38,16 +36,20 @@ export function FilterMenu({ navDropdown }: { navDropdown: NavDropdownItem }) {
                     <ChevronDownIcon className="h-4 w-4" />
                 </div>
             </MenuHandler>
-            <MenuList className="grid grid-cols-4 gap-8 outline-none border-none bg-[#373b40] text-white z-100 mt-[21] p-3">
+            <MenuList className="grid grid-cols-4 gap-8 outline-none border-none bg-[#373b40] text-white z-100 mt-[21] p-3"
+                placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={0}>
                 {loading &&
-                    <MenuItem className="flex justify-center items-center col-span-4 h-full">
+                    <MenuItem className="flex justify-center items-center col-span-4 h-full"
+                        placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={0}>
                         <Loading width={30} height={30} className={""} />
                     </MenuItem>
                 }
 
                 {items.map((item) => (
                     <Link key={item._id} href={`/${navDropdown.slug}/${item.slug}`} className="hover:text-[#ffd875] outline-none">
-                        <MenuItem>{item.name}</MenuItem>
+                        <MenuItem placeholder={undefined} onPointerEnterCapture={0} onPointerLeaveCapture={0}>
+                            {item.name}
+                        </MenuItem>
                     </Link>
                 ))}
             </MenuList>

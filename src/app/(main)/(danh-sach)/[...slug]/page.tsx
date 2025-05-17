@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams, useSearchParams } from 'next/navigation';
@@ -25,9 +24,9 @@ export default function DanhSach() {
     const fetchData = async (pageNumber: number) => {
         setIsLoading(true);
         try {
-            const response: ApiResponse = await handleAPIs.getData(
+            const response = await handleAPIs.getData(
                 `https://phimapi.com/v1/api/${slug[0]}/${slug[1]}?page=${pageNumber}&sort_field=modified.time&sort_type=desc&limit=30`
-            );
+            ) as ApiResponse;
             if (response.status) {
                 setData(response.data);
                 setCurrentPage(pageNumber);

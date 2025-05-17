@@ -1,11 +1,13 @@
-import axiosClient from './axiosClient';
+import axios from 'axios';
+import { ApiResponse } from '@/shared/interfaces/IApiResponse';
+import { Items } from '@/shared/interfaces/INavItem';
+import { NavDropdownItem } from "@/shared/interfaces/INavItem";
 
-class HandleAPI {
-    getData = async (url: string) => {
-        return axiosClient.get(url);
+const handleAPIs = {
+    getData: async (url: string): Promise<ApiResponse | Items[]> => {
+        const response = await axios.get(url);
+        return response.data;
     }
-}
-
-const handleAPIs = new HandleAPI();
+};
 
 export default handleAPIs;

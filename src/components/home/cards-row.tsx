@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client";
 import React, { useEffect, useState } from "react";
 import { ChevronRightIcon, PlayIcon } from "@heroicons/react/24/solid";
@@ -18,7 +17,7 @@ export default function CardsRow({ title, type_list, page, sort_field, sort_type
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                const response: ApiResponse = await handleAPIs.getData(`https://phimapi.com/v1/api/danh-sach/${type_list}?page=${page}&sort_field=${sort_field}&sort_type=${sort_type}&sort_lang=${sort_lang}&category=${category}&country=${country}&year=${year}&limit=${limit}`);
+                const response = await handleAPIs.getData(`https://phimapi.com/v1/api/danh-sach/${type_list}?page=${page}&sort_field=${sort_field}&sort_type=${sort_type}&sort_lang=${sort_lang}&category=${category}&country=${country}&year=${year}&limit=${limit}`) as ApiResponse;
                 if (response.status) {
                     setData(response.data.items as MovieDetail[]);
                 } else {

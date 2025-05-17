@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client";
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
@@ -47,7 +46,7 @@ export default function XemPhim() {
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                const response: ApiResponse = await handleAPIs.getData(`https://phimapi.com/phim/${slug}`);
+                const response = await handleAPIs.getData(`https://phimapi.com/phim/${slug}`) as ApiResponse;
                 if (response.status) {
                     setData(response.movie);
                     setEpisode(response.episodes);
@@ -191,6 +190,7 @@ export default function XemPhim() {
 
                     <div className='lg:-ml-5 xl:-ml-4'>
                         <MovieRecommender
+                            _id={data._id}
                             type={data.type}
                             page={1} sort_field={''}
                             sort_type={''}

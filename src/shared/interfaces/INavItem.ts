@@ -12,7 +12,7 @@ export interface NavDropdownItem {
 }
 
 export interface Items {
-    map(arg0: (item: any) => React.JSX.Element): React.ReactNode;
+    map(arg0: (item: Items) => React.JSX.Element): React.ReactNode;
     _id: string;
     name: string;
     slug: string;

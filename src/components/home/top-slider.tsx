@@ -1,6 +1,5 @@
-// @ts-nocheck
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, ReactNode } from "react";
 import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -11,7 +10,7 @@ import { Movie } from "@/shared/interfaces/IMovie";
 import { MovieDetail } from "@/shared/interfaces/IMovieDetail";
 import { ApiResponse } from "@/shared/interfaces/IApiResponse";
 import Loading from "../ui/loading";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, MotionProps } from "framer-motion";
 import { getRandomElements } from "@/lib/utils";
 
 // Error boundary component to catch rendering errors
@@ -56,6 +55,15 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     }
 }
 
+interface MotionDivProps extends MotionProps {
+    children: ReactNode;
+    className?: string;
+}
+
+const MotionDiv = ({ children, ...props }: MotionDivProps) => {
+    return <motion.div {...props}>{children}</motion.div>;
+};
+
 export default function TopSlider() {
     const [activeIndex, setActiveIndex] = useState(0);
     const [data, setData] = useState<MovieDetail[]>([]);
@@ -93,7 +101,7 @@ export default function TopSlider() {
                 if (!Array.isArray(movies)) {
                     throw new Error("Invalid movies data - not an array");
                 }
-                
+
                 const detailedMovies = await Promise.all(
                     movies.map(async (movie) => {
                         try {
@@ -101,7 +109,7 @@ export default function TopSlider() {
                                 throw new Error("Invalid movie data - missing slug");
                             }
 
-                            const response: ApiResponse = await handleAPIs.getData(`https://phimapi.com/phim/${movie.slug}`);
+                            const response = await handleAPIs.getData(`https://phimapi.com/phim/${movie.slug}`) as ApiResponse;
                             if (response.status && response.movie) {
                                 return { ...movie, ...response.movie } as MovieDetail;
                             }
@@ -127,7 +135,7 @@ export default function TopSlider() {
             setIsLoading(true);
             setHasError(false);
             try {
-                const response: ApiResponse = await handleAPIs.getData('https://phimapi.com/danh-sach/phim-moi-cap-nhat');
+                const response = await handleAPIs.getData('https://phimapi.com/danh-sach/phim-moi-cap-nhat') as ApiResponse;
                 if (response.status && response.items && Array.isArray(response.items)) {
                     await fetchDetailData(response.items);
                 }
@@ -391,54 +399,20 @@ export default function TopSlider() {
         }
     };
 
-    // Render error state if needed
-    if (hasError) {
-        return (
-            <div className="flex flex-col items-center justify-center p-10 bg-black/50 rounded-lg">
-                <h2 className="text-red-400 text-xl mb-3">Something went wrong</h2>
-                <p className="text-white mb-5">{errorMessage}</p>
-                <button
-                    onClick={() => {
-                        setHasError(false);
-                        setIsLoading(true);
-                        // Re-fetch data
-                        const fetchData = async () => {
-                            try {
-                                const response = await handleAPIs.getData('https://phimapi.com/danh-sach/phim-moi-cap-nhat');
-                                if (response.status) {
-                                    // Process data
-                                    setData(response.items);
-                                }
-                            } catch (error) {
-                                logError('Error refetching data', error);
-                            } finally {
-                                setIsLoading(false);
-                            }
-                        };
-                        fetchData();
-                    }}
-                    className="px-4 py-2 bg-[#ffbd59] text-black rounded"
-                >
-                    Try again
-                </button>
-            </div>
-        );
-    }
-
     return (
         <ErrorBoundary>
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
                 {isLoading ? (
-                    <motion.div
+                    <MotionDiv
                         key="loading"
                         initial={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className="flex justify-center items-center h-screen"
                     >
                         <Loading width={100} height={100} className={""} />
-                    </motion.div>
+                    </MotionDiv>
                 ) : (
-                    <motion.div
+                    <MotionDiv
                         key="slider"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -482,7 +456,7 @@ export default function TopSlider() {
                                 <p className="text-white text-lg">No movies available</p>
                             </div>
                         )}
-                    </motion.div>
+                    </MotionDiv>
                 )}
             </AnimatePresence>
         </ErrorBoundary>

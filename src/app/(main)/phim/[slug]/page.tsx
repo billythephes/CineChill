@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client";
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
@@ -38,7 +37,7 @@ export default function Phim() {
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                const response: ApiResponse = await handleAPIs.getData(`https://phimapi.com/phim/${slug}`);
+                const response = await handleAPIs.getData(`https://phimapi.com/phim/${slug}`) as ApiResponse;
                 if (response.status) {
                     setData(response.movie);
                     setEpisode(response.episodes);

@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client";
 import Form from "next/form";
 import { useEffect, useRef, useState } from "react";
@@ -24,9 +23,9 @@ export default function SearchBar({ isSearchOpen }: { isSearchOpen: boolean }) {
                 setHasQuery(true);
                 setIsLoading(true);
                 try {
-                    const response: ApiResponse = await handleAPIs.getData(
+                    const response = await handleAPIs.getData(
                         `https://phimapi.com/v1/api/tim-kiem?keyword=${escapeHtmlAndEncodeSpaces(query)}&page=1&sort_field=name&sort_type=desc&limit=5`
-                    );
+                    ) as ApiResponse;
                     if (response.status) {
                         setData(response.data.items as MovieDetail[]);
                     } else {

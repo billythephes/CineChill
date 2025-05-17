@@ -1,6 +1,12 @@
 import { Metadata } from 'next';
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+type Props = {
+  params: {
+    slug: string[]
+  }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const response = await fetch(`https://phimapi.com/v1/api/${params.slug[0]}/${params.slug[1]}`);
   const data = await response.json();
   

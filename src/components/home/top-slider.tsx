@@ -148,7 +148,7 @@ export default function TopSlider() {
 
     useEffect(() => {
         if (data.length > 0) {
-            const random = getRandomElements(data, 6);
+            const random = getRandomElements(data, 6) as MovieDetail[];
             setRandomData(random);
         }
     }, [data]);

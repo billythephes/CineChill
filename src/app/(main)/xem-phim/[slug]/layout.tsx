@@ -1,12 +1,9 @@
 import { Metadata } from 'next';
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const response = await fetch(`https://phimapi.com/phim/${params.slug}`);
-  const data = await response.json();
-
+export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `Xem Phim ${data.movie.name} ${data.movie.quality} ${data.movie.lang} - CineChill`,
-    description: data.movie.content
+    title: 'Xem phim tại nhà - CineChill',
+    description: 'Xem phim tại nhà - CineChill'
   };
 }
 

@@ -1,25 +1,16 @@
-import { Metadata } from 'next';
+import { Metadata } from 'next'
 
-type Props = {
-  params: {
-    slug: string[]
-  }
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const response = await fetch(`https://phimapi.com/v1/api/${params.slug[0]}/${params.slug[1]}`);
-  const data = await response.json();
-  
+export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: data.data.seoOnPage.titleHead,
-    description: data.data.seoOnPage.descriptionHead
+    title: 'Danh sách phim',
+    description: 'Danh sách phim'
   };
 }
 
-export default function DanhSachLayout({
+export default function Layout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return children;
 }

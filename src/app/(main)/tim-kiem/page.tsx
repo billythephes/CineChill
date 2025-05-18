@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from 'next/navigation';
 import Image from "next/image";
 import handleAPIs from "@/lib/api/handleAPI";
@@ -10,7 +10,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/16/solid";
 import Loading from "@/components/ui/loading";
 import { escapeHtmlAndEncodeSpaces } from "@/lib/utils";
 
-export default function TimKiem() {
+function SearchContent() {
     const [data, setData] = useState<Items>();
     const [currentPage, setCurrentPage] = useState(1);
     const [inputPage, setInputPage] = useState('1');
@@ -214,3 +214,18 @@ export default function TimKiem() {
     );
 }
 
+function SearchLoadingFallback() {
+    return (
+        <div className="flex justify-center items-center h-[70vh]">
+            <Loading width={70} height={70} className={""} />
+        </div>
+    );
+}
+
+export default function TimKiem() {
+    return (
+        <Suspense fallback={<SearchLoadingFallback />}>
+            <SearchContent />
+        </Suspense>
+    );
+}
